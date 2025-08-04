@@ -1,29 +1,105 @@
-# Create T3 App
+# CV Validation System
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A web application that validates CV/resume information by comparing user-submitted form data against the content of an uploaded PDF document. Built with the [T3 Stack](https://create.t3.gg/).
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- **Form-based Data Entry**: Users input their personal information including name, email, phone number, skills, and experience
+- **PDF Upload**: Support for PDF CV/resume uploads with text extraction
+- **Intelligent Validation**: Advanced text matching algorithms that compare form data against PDF content
+- **Detailed Feedback**: Provides specific information about which fields match or don't match the uploaded document
+- **Real-time Processing**: Instant validation results with loading states
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## How It Works
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+1. **Fill the Form**: Enter your personal details in the web form
+2. **Upload PDF**: Select and upload your CV/resume in PDF format
+3. **Automatic Validation**: The system extracts text from your PDF and compares it with your form data
+4. **Get Results**: Receive detailed feedback on matches and mismatches
+
+## Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org) with App Router
+- **Database**: PostgreSQL with [Prisma](https://prisma.io) ORM
+- **API**: [tRPC](https://trpc.io) for type-safe API layer
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) v4
+- **PDF Processing**: pdf-parse for text extraction
+- **Validation**: Zod schemas for runtime type checking
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- PostgreSQL database
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` and configure your database URL:
+   ```
+   DATABASE_URL="postgresql://postgres:password@localhost:5432/validate-cv"
+   ```
+
+4. Set up the database:
+   ```bash
+   npm run db:push
+   ```
+
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+## Development Commands
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run typecheck    # Run TypeScript type checking
+npm run db:studio    # Open Prisma Studio
+```
+
+## Validation Algorithm
+
+The system uses sophisticated text matching to validate CV content:
+
+- **Text Normalization**: Removes special characters and normalizes whitespace
+- **Flexible Phone Matching**: Compares last 7 digits of phone numbers
+- **Skills Validation**: Individual validation of comma-separated skills
+- **Experience Matching**: Word-based matching with configurable similarity thresholds
+- **Fuzzy Matching**: Handles variations in formatting and minor discrepancies
 
 ## Learn More
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+To learn more about the T3 Stack and its components:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- [T3 Stack Documentation](https://create.t3.gg/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [tRPC Documentation](https://trpc.io/docs)
+- [Prisma Documentation](https://www.prisma.io/docs)
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## Deployment
 
-## How do I deploy this?
+This application can be deployed on platforms like Vercel, Netlify, or any Node.js hosting service. Make sure to:
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+1. Set up a PostgreSQL database
+2. Configure environment variables
+3. Run database migrations
+4. Build the application
+
+For detailed deployment guides, see the [T3 Stack deployment documentation](https://create.t3.gg/en/deployment/vercel).
